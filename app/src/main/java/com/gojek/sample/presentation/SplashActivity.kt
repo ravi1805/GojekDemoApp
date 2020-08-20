@@ -5,7 +5,7 @@ import android.os.Handler
 import android.view.WindowManager
 import com.gojek.sample.R
 import com.gojek.sample.navigation.ClassNavigation
-import com.gojek.sample.presentation.view.MainActivity
+import com.gojek.sample.presentation.view.GitHubRepoActivity
 
 private const val SPLASH_SCREEN_TIMEOUT = 3000L
 
@@ -25,7 +25,7 @@ class SplashActivity : BaseActivity() {
 
     private fun startSearchListActivity() {
         Handler().postDelayed({
-            ClassNavigation.navigateScreen(this, MainActivity::class.java, true)
+            ClassNavigation.navigateScreen(this, GitHubRepoActivity::class.java, true)
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
         }, SPLASH_SCREEN_TIMEOUT)

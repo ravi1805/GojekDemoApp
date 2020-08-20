@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.view.MainActivity"
+            android:name=".presentation.view.GitHubRepoActivity"
             android:windowSoftInputMode="stateHidden" />
     </application>
 
