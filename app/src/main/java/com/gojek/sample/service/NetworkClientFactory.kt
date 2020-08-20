@@ -3,6 +3,7 @@ package com.gojek.sample.service
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import com.google.gson.reflect.TypeToken
 import io.reactivex.ObservableEmitter
 import okhttp3.ResponseBody
 import retrofit2.Callback
@@ -64,5 +65,12 @@ class NetworkClientFactory @Inject constructor(private val context: Context) :
         return CloudApiRetrofitJsonCallback(emitter, resCls)
     }
 
+
+    override fun <R> getJsonCallback(
+        emitter: ObservableEmitter<List<R>>,
+        listOfTypeToken: TypeToken<out List<R>>
+    ): Callback<ResponseBody> {
+        return CloudArrayApiRetrofitJsonCallback(emitter, listOfTypeToken)
+    }
 
 }
