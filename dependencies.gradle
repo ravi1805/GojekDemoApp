@@ -25,4 +25,13 @@ ext {
     //Dagger
     daggerVersion = "2.24"
     javaxAnnotationVersion = '1.0'
+
+    //Retrofit Version
+    retrofitVersion = "2.6.0"
+    rxJavaRetrofitAdapterVer = "2.3.0"
+    okHttp3Version = "4.2.2"
+    gsonVersion = "2.8.5"
+    retrofitLoggerVersion = "4.2.0"
+    rxAdapterVersion = "2.6.1"
+
 }

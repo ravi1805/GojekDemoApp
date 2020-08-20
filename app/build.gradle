@@ -60,6 +60,8 @@ dependencies {
     implementation "androidx.test.espresso:espresso-idling-resource:$espressoCoreVersion"
     androidTestImplementation "androidx.test:rules:$testRule"
 
+
+
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle"
 
@@ -68,11 +70,18 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion"
     implementation "androidx.cardview:cardview:$cardViewVersion"
 
+    //Dagger
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
-
     implementation "com.google.dagger:dagger:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     compileOnly "javax.annotation:jsr250-api:$javaxAnnotationVersion"
 
+    //Retrofit
+    implementation "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${retrofitLoggerVersion}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rxAdapterVersion"
+    implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okHttp3Version"
 }
