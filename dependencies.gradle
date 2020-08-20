@@ -1,0 +1,24 @@
+ext {
+    kotlin_version = "1.3.61"
+    rxKotlinVersion = "2.4.0"
+    compileSdkVer = 29
+    targetSdkVer = 29
+    androidPluginVer = "3.5.0"
+    buildToolsVer = "29.0.3"
+    minSdkVer = 21
+    lifecycle = "2.1.0"
+    appcompactVersion="1.1.0"
+    ktxCoreVersion = "1.1.0"
+    materialDesignVersion ="1.0.0"
+    constraintLayoutVersion = "1.1.3"
+    recyclerviewVersion = "1.0.0"
+    coroutineVersion ="1.0.1"
+    cardViewVersion ="1.0.0"
+    multidexVersion = "1.0.3"
+
+    //Test dependencies
+    junitVer = "4.12"
+    androidJunitrVer = "1.1.1"
+    espressoCoreVersion = "3.2.0"
+    testRule= "1.3.0-alpha02"
+}

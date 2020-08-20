@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorPrimary">#3949ab</color>
+    <color name="colorPrimaryDark">#00227b</color>
+    <color name="colorAccent">#560027</color>
+    <color name="colorBlack">#000000</color>
+    <color name="them_color">#00227b</color>
+    <color name="red_color">#ff0000</color>
+    <color name="action_bar_text_hint">#393c3d</color>
+    <color name="semitransparent">#7f000000</color>
+    <color name="divider_color">#feb9b9b9</color>
+    <color name="gray_color">#989898</color>
+    <color name="red_button_color_disabled">#e4c0a6</color>
+    <color name="dark_red">#a4574c</color>
+    <color name="drawer_bg">#182a40</color>
+    <color name="header_bg">#3159A3</color>
+    <color name="tab_selected_bg">#86dded</color>
+    <color name="tab_bg">#32554e</color>
+    <color name="tab_un_selected_bg">#ada6b4</color>
+    <color name="un_selected_button_bg">#4C84F0</color>
+    <color name="selected_button_bg">#4C84F0</color>
+    <color name="user_count_bg">#6AC7C0</color>
+    <color name="blue_color_picker">#0066FF</color>
+    <color name="brown_color_picker">#AF593E</color>
+    <color name="green_color_picker">#01A368</color>
+    <color name="orange_color_picker">#FF861F</color>
+    <color name="red_color_picker">#ED0A3F</color>
+    <color name="red_orange_color_picker">#FF3F34</color>
+    <color name="sky_blue_color_picker">#76D7EA</color>
+    <color name="violet_color_picker">#8359A3</color>
+    <color name="yellow_color_picker">#FBE870</color>
+    <color name="yellow_green_color_picker">#C5E17A</color>
+    <color name="upload_view_color">#fcf8e3</color>
+
+    <!--<color name="hint_text_color">#302F9F</color>-->
+    <color name="hint_text_color">#2B58A0</color>
+
+    <color name="error_text_color">#EB4339</color>
+</resources>

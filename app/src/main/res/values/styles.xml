@@ -1,0 +1,36 @@
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorBlack</item>
+        <item name="colorPrimaryDark">@color/colorBlack</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="EditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/gray_color</item>
+        <item name="colorControlActivated">@color/colorBlack</item>
+        <item name="colorControlHighlight">@color/colorBlack</item>
+    </style>
+
+    <style name="TextBodyStyleRegular">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/titillium_regular</item>
+        <item name="android:textSize">@dimen/font_size_14</item>
+    </style>
+
+
+    <style name="TextBodyStyleBold">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/titillium_bold</item>
+        <item name="android:textSize">@dimen/font_size_14</item>
+    </style>
+
+</resources>

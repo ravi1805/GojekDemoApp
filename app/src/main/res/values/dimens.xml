@@ -1,0 +1,14 @@
+<resources>
+    <dimen name="_8dp">8dip</dimen>
+    <dimen name="_12dp">12dip</dimen>
+    <dimen name="_16dp">16dip</dimen>
+    <dimen name="_20dp">20dip</dimen>
+    <dimen name="_24dp">24dip</dimen>
+    <dimen name="_28dp">28dip</dimen>
+    <dimen name="_32dp">32dip</dimen>
+
+    <dimen name="font_size_14">14sp</dimen>
+    <dimen name="font_size_16">16sp</dimen>
+
+
+</resources>

@@ -1,0 +1,70 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion compileSdkVer
+    buildToolsVersion buildToolsVer
+
+    defaultConfig {
+        applicationId "com.gojek.sample"
+        minSdkVersion minSdkVer
+        targetSdkVersion targetSdkVer
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def project = "GojekDemoApp"
+            def SEP = "_"
+            def newApkName = project + SEP + version + ".apk"
+            outputFileName = new File(newApkName)
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "com.android.support:multidex:$multidexVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation "androidx.appcompat:appcompat:$appcompactVersion"
+    implementation "androidx.core:core-ktx:$ktxCoreVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    implementation "com.google.android.material:material:$materialDesignVersion"
+
+
+
+    testImplementation "junit:junit:$junitVer"
+    androidTestImplementation "androidx.test.ext:junit:$androidJunitrVer"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
+    implementation "androidx.test.espresso:espresso-idling-resource:$espressoCoreVersion"
+    androidTestImplementation "androidx.test:rules:$testRule"
+
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle"
+
+
+    implementation "androidx.recyclerview:recyclerview:$recyclerviewVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion"
+    implementation "androidx.cardview:cardview:$cardViewVersion"
+}
