@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorBlack</item>
         <item name="colorPrimaryDark">@color/colorBlack</item>
@@ -6,32 +6,31 @@
         <item name="android:windowBackground">@android:color/white</item>
         <item name="android:windowDisablePreview">true</item>
     </style>
-
+    <style name="HeaderBar">
+        <item name="android:background">#303F9F</item>
+    </style>
+    <style name="AppTheme.PopupOverlay" parent="AppTheme.PopupOverlay" tools:ignore="ResourceCycle">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="EditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorControlNormal">@color/gray_color</item>
-        <item name="colorControlActivated">@color/colorBlack</item>
-        <item name="colorControlHighlight">@color/colorBlack</item>
-    </style>
-
     <style name="TextBodyStyleRegular">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/font_size_16</item>
+        <item name="android:textSize">@dimen/font_size_14</item>
+        <item name="android:fontFamily">@font/titillium_regular</item>
         <item name="android:textColor">@color/colorBlack</item>
-
     </style>
 
 
     <style name="TextBodyStyleBold">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">@font/titillium_bold</item>
-        <item name="android:textSize">@dimen/font_size_14</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/font_size_18</item>
     </style>
 
 </resources>

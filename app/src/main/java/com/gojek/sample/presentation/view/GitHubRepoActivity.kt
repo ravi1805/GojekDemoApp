@@ -1,9 +1,12 @@
 package com.gojek.sample.presentation.view
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,8 +20,9 @@ import com.gojek.sample.presentation.utils.ResourceState
 import com.gojek.sample.presentation.utils.ViewModelFactory
 import com.gojek.sample.presentation.viewmodel.GitHubViewModel
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_github_repo.*
 import javax.inject.Inject
+
 
 class GitHubRepoActivity : AppCompatActivity() {
     private lateinit var gitHubItemAdapter: GitHubItemAdapter
@@ -29,7 +33,10 @@ class GitHubRepoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AndroidInjection.inject(this)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_github_repo)
+        val toolbar = findViewById<View>(R.id.toolBar) as Toolbar
+        toolbar.title=""
+        setSupportActionBar(toolbar)
         initView()
         gitHubViewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(GitHubViewModel::class.java)
@@ -58,7 +65,7 @@ class GitHubRepoActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        gitHubViewModel.getGitHubRepo(GitHubRepoReq("","daily"))
+        gitHubViewModel.getGitHubRepo(GitHubRepoReq("javascript","daily"))
     }
 
     /**
@@ -95,4 +102,17 @@ class GitHubRepoActivity : AppCompatActivity() {
         progressbar.visibility = View.GONE
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean { // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.option_more, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean { // Handle action bar item clicks here. The action bar will
+        val id: Int = item.itemId
+        if (id == R.id.action_favorite) {
+            Toast.makeText(this@GitHubRepoActivity, "Action clicked", Toast.LENGTH_LONG).show()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

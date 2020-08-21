@@ -12,6 +12,7 @@ class GitHubItemAdapter(context: Context) :
     CustomRecyclerViewAdapter<UIGitHubRepoData, OnRecyclerObjectClickListener<UIGitHubRepoData>, BaseViewHolder<UIGitHubRepoData, OnRecyclerObjectClickListener<UIGitHubRepoData>>>(
         context
     ) {
+    var mExpandedPosition = -1
 
     override fun getId(position: Int): String {
         return getItemAt(position).name
@@ -26,7 +27,7 @@ class GitHubItemAdapter(context: Context) :
                 R.layout.github_repo_item,
                 parent,
                 false
-            )
+            ), adapter = this
         )
     }
 

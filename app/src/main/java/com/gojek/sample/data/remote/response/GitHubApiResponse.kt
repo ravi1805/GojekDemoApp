@@ -12,7 +12,7 @@ data class GitHubApiResponse(
     val description: String? = null,
     val language: String? = null,
     val languageColor: String? = null,
-    val star: Int,
+    val stars: Int,
     val forks: Int
 )
 
@@ -20,7 +20,7 @@ data class GitHubApiResponse(
  * this the data model for parsing remote data
  */
 fun GitHubApiResponse.mapToDomain(): UIGitHubRepoData {
-    return UIGitHubRepoData(name ?: "", avatar ?: "", description ?: "", language ?: "", languageColor ?: "", star, forks)
+    return UIGitHubRepoData(author ?: "",name ?: "", avatar ?: "", description ?: "", language ?: "", languageColor ?: "", stars, forks)
 }
 
 fun List<GitHubApiResponse>.mapToDomain(): List<UIGitHubRepoData> {

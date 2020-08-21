@@ -23,18 +23,17 @@ object AppUtils {
         val requestOptions = RequestOptions()
         requestOptions.placeholder(R.drawable.ic_launcher_gojek)
         requestOptions.format(DecodeFormat.PREFER_ARGB_8888)
-        if (context != null) {
-            Glide.with(context).setDefaultRequestOptions(requestOptions).asBitmap().load(imageUrl)
-                .into(object : BitmapImageViewTarget(imageView) {
-                    override fun setResource(resource: Bitmap?) {
-                        val circularBitmapDrawable =
-                            RoundedBitmapDrawableFactory.create(context.resources, resource)
-                        circularBitmapDrawable.isCircular = true
-                        imageView.setImageDrawable(circularBitmapDrawable)
-                    }
-                })
+        Glide.with(context).setDefaultRequestOptions(requestOptions).asBitmap().load(imageUrl)
+            .into(object : BitmapImageViewTarget(imageView) {
+                override fun setResource(resource: Bitmap?) {
+                    val circularBitmapDrawable =
+                        RoundedBitmapDrawableFactory.create(context.resources, resource)
+                    circularBitmapDrawable.isCircular = true
+                    imageView.setImageDrawable(circularBitmapDrawable)
+                }
+            })
 
-        }
+
     }
 
 

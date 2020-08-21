@@ -2,38 +2,124 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/_8dp">
+    android:layout_marginBottom="@dimen/_8dp"
+    android:animateLayoutChanges="true"
+    android:background="@drawable/list_item_background"
+    android:stateListAnimator="@anim/layout_fall_down">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/itemImgView"
             android:layout_width="@dimen/image_width"
             android:layout_height="@dimen/image_height"
-            android:layout_margin="@dimen/_8dp"
-            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/_16dp"
             android:src="@drawable/ic_launcher_gojek" />
 
         <LinearLayout
+            android:id="@+id/nameView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
             android:layout_toRightOf="@+id/itemImgView"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/_8dp">
 
             <TextView
-                android:id="@+id/titleName"
+                android:id="@+id/tvAuthor"
                 style="@style/TextBodyStyleRegular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:gravity="left"
                 android:maxLines="2"
-               />
+                android:text="test" />
+
+            <TextView
+                android:id="@+id/tvTitleName"
+                style="@style/TextBodyStyleBold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:maxLines="2"
+                android:text="test" />
+
+            <LinearLayout
+                android:id="@+id/layoutDetailView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8dp"
+                android:layout_marginBottom="@dimen/_8dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvDescreption"
+                    style="@style/TextBodyStyleRegular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:maxLines="2"
+                    android:textSize="@dimen/font_size_16"
+                    android:text="test" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/_8dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/languageColor"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="@dimen/_8dp"
+                        android:background="@drawable/circle" />
+
+                    <TextView
+                        android:id="@+id/tvLanguage"
+                        style="@style/TextBodyStyleRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="text 1" />
+
+                    <TextView
+                        android:id="@+id/tvStar"
+                        style="@style/TextBodyStyleRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@mipmap/ic_star"
+                        android:layout_marginStart="@dimen/_32dp"
+                        android:drawablePadding="@dimen/_8dp"
+                        android:gravity="left"
+                        android:text="text 2" />
+
+                    <TextView
+                        android:id="@+id/tvFork"
+                        style="@style/TextBodyStyleRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@mipmap/ic_fork"
+                        android:drawablePadding="@dimen/_8dp"
+                        android:layout_marginStart="@dimen/_32dp"
+                        android:ellipsize="end"
+                        android:gravity="left"
+                        android:maxLines="2"
+                        android:text="text 3" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
+
     </RelativeLayout>
 
 
