@@ -21,8 +21,9 @@
     <style name="TextBodyStyleRegular">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:fontFamily">@font/titillium_regular</item>
-        <item name="android:textSize">@dimen/font_size_14</item>
+        <item name="android:textSize">@dimen/font_size_16</item>
+        <item name="android:textColor">@color/colorBlack</item>
+
     </style>
 
 

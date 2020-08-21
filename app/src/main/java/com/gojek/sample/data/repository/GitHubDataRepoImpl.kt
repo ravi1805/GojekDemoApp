@@ -1,7 +1,7 @@
 package com.gojek.sample.data.repository
 
 import com.gojek.sample.data.datasource.IRemoteDataTransaction
-import com.gojek.sample.domain.model.UIRepoData
+import com.gojek.sample.domain.model.UIGitHubRepoData
 import com.gojek.sample.domain.repository.IGitHubDataRepo
 import com.gojek.sample.domain.request.GitHubRepoReq
 import io.reactivex.Observable
@@ -12,7 +12,7 @@ class GitHubDataRepoImpl @Inject constructor(
 ) :
     IGitHubDataRepo {
 
-    override fun getGitHubRepository(request: GitHubRepoReq): Observable<List<UIRepoData>> {
+    override fun getGitHubRepository(request: GitHubRepoReq): Observable<List<UIGitHubRepoData>> {
        return remoteDataTransaction.getGitHubRepository(request)
     }
 

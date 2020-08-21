@@ -1,0 +1,3 @@
+package com.cavista.sample.presentation.customeview
+
+interface IBaseRecyclerListener

@@ -1,16 +1,17 @@
 package com.gojek.sample.data.remote.response
 
-import com.gojek.sample.domain.model.UIRepoData
+import com.gojek.sample.domain.model.UIGitHubRepoData
 
 /**
  * this the data model for parsing remote data
  */
 data class GitHubApiResponse(
-    val name: String,
-    val imageUrl: String,
-    val description: String,
-    val language: String,
-    val languageColor: String,
+    val author: String? = null,
+    val name: String? = null,
+    val avatar: String? = null,
+    val description: String? = null,
+    val language: String? = null,
+    val languageColor: String? = null,
     val star: Int,
     val forks: Int
 )
@@ -18,11 +19,11 @@ data class GitHubApiResponse(
 /**
  * this the data model for parsing remote data
  */
-fun GitHubApiResponse.mapToDomain(): UIRepoData {
-    return UIRepoData(name, imageUrl, description, language, languageColor, star, forks)
+fun GitHubApiResponse.mapToDomain(): UIGitHubRepoData {
+    return UIGitHubRepoData(name ?: "", avatar ?: "", description ?: "", language ?: "", languageColor ?: "", star, forks)
 }
 
-fun List<GitHubApiResponse>.mapToDomain(): List<UIRepoData> {
+fun List<GitHubApiResponse>.mapToDomain(): List<UIGitHubRepoData> {
     return map { it.mapToDomain() }
 }
 

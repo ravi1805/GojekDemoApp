@@ -4,7 +4,7 @@ import com.gojek.sample.data.remote.api.IRemoteServiceApi
 import com.gojek.sample.data.datasource.IRemoteDataTransaction
 import com.gojek.sample.data.remote.response.GitHubApiResponse
 import com.gojek.sample.data.remote.response.mapToDomain
-import com.gojek.sample.domain.model.UIRepoData
+import com.gojek.sample.domain.model.UIGitHubRepoData
 import com.gojek.sample.domain.request.GitHubRepoReq
 import com.gojek.sample.service.INetworkClientService
 import com.google.gson.reflect.TypeToken
@@ -16,7 +16,7 @@ class RemoteTransactionManager @Inject constructor(
 ) :
     IRemoteDataTransaction {
 
-    override fun getGitHubRepository(request: GitHubRepoReq): Observable<List<UIRepoData>> {
+    override fun getGitHubRepository(request: GitHubRepoReq): Observable<List<UIGitHubRepoData>> {
         return Observable.create<List<GitHubApiResponse>> { emitter ->
             val call = getApiService().getGitHubRepo(request.language, request.sinceTime)
             val callback =

@@ -34,4 +34,12 @@ ext {
     retrofitLoggerVersion = "4.2.0"
     rxAdapterVersion = "2.6.1"
 
+    //Rx
+    rxAndroidVersion = "2.1.0"
+    rxJavaVersion = "2.2.2"
+    javaxAnnotationVersion = '1.0'
+    multidexVersion = '1.0.3'
+
+    //Glide
+    glideVersion = "4.11.0"
 }

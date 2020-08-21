@@ -1,6 +1,6 @@
 package com.gojek.sample.domain.model
 
-data class UIRepoData(
+data class UIGitHubRepoData(
     val name: String,
     val imageUrl: String,
     val description: String,

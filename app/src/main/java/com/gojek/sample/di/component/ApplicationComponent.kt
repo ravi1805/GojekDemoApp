@@ -2,10 +2,7 @@ package com.gojek.sample.di.component
 
 import android.app.Application
 import com.gojek.sample.MainApplication
-import com.gojek.sample.di.modules.ActivityModule
-import com.gojek.sample.di.modules.AppModule
-import com.gojek.sample.di.modules.NetworkModule
-import com.gojek.sample.di.modules.RepositoryModule
+import com.gojek.sample.di.modules.*
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -18,7 +15,9 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         ActivityModule::class,
         NetworkModule::class,
-        RepositoryModule::class]
+        RepositoryModule::class,
+        ExecuterModule::class,
+        ViewModelModuleDI::class]
 )
 
 interface ApplicationComponent {

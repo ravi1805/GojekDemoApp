@@ -24,10 +24,18 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+    def URL = "URL"
+    def CONFIG = { k -> "\"${project.properties.get(k)}\"" }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", URL, CONFIG("dev_url")
+        }
+        debug {
+            minifyEnabled false
+            buildConfigField "String", URL, CONFIG("dev_url")
         }
     }
 
@@ -84,4 +92,14 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rxAdapterVersion"
     implementation "com.google.code.gson:gson:$gsonVersion"
     implementation "com.squareup.okhttp3:okhttp:$okHttp3Version"
+
+    // RXJava
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+
+    //Glide
+    implementation "com.github.bumptech.glide:glide:${glideVersion}"
+    kapt "com.github.bumptech.glide:compiler:${glideVersion}"
+
 }
