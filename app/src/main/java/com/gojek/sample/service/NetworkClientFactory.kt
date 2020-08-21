@@ -5,8 +5,11 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import com.google.gson.reflect.TypeToken
 import io.reactivex.ObservableEmitter
+import okhttp3.Cache
 import okhttp3.ResponseBody
 import retrofit2.Callback
+import java.io.File
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -31,10 +34,16 @@ class NetworkClientFactory @Inject constructor(private val context: Context) :
      */
     override fun setupNetworkClient(urlString: String) {
         networkClient = RetrofitClient()
-        networkClient.setupNetworkClient(urlString)
+        networkClient.setupNetworkClient(urlString, getCache())
 
     }
 
+    private fun getCache(): Cache {
+        val cacheSize = (5 * 1024 * 1024).toLong()
+        val cacheDir = File(System.getProperty("java.io.tmpdir"), UUID.randomUUID().toString())
+        return Cache(cacheDir, cacheSize)
+
+    }
 
     /**
      * It will return the status of current network

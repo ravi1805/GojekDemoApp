@@ -15,6 +15,7 @@
     <dimen name="cardview_height">100dp</dimen>
     <dimen name="image_width">40dp</dimen>
     <dimen name="image_height">40dp</dimen>
+    <dimen name="button_height">55dp</dimen>
 
 
 </resources>

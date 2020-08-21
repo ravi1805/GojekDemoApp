@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Gojek Demo</string>
     <string name="trending">Trending</string>
+    <string name="some_thing_went_wrong">Some thing went wrong..</string>
+    <string name="an_alien_is_probably_blocking_your_signal">An alien is probably blocking your signal.</string>
+    <string name="str_retry">Retry</string>
 </resources>

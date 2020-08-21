@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/noInternetImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/nointernet_connection"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="@dimen/_32dp"
+           />
+
+        <TextView
+            android:id="@+id/noInternetMsg"
+            style="@style/TextBodyStyleBold"
+            android:layout_marginTop="@dimen/_8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/noInternetImage"
+            android:gravity="center"
+            android:text="@string/some_thing_went_wrong"
+            android:textSize="@dimen/font_size_18" />
+
+        <TextView
+            style="@style/TextBodyStyleRegular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/noInternetMsg"
+            android:gravity="center"
+            android:text="@string/an_alien_is_probably_blocking_your_signal"
+            android:textColor="@color/gray_color"
+            android:textSize="@dimen/font_size_18" />
+
+        <Button
+            android:id="@+id/retryButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/white_bg"
+            android:padding="@dimen/_16dp"
+            android:text="@string/str_retry"
+            android:textAllCaps="true"
+            android:layout_margin="@dimen/_32dp"
+            android:textColor="@color/green_color_picker" />
+    </RelativeLayout>
+
+
+</merge>

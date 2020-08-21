@@ -12,22 +12,27 @@
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
         <TextView
+            style="@style/TextBodyStyleBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TextBodyStyleBold"
             android:layout_gravity="center"
             android:text="@string/trending"
-            android:textSize="@dimen/font_size_18"
-            android:textColor="@color/colorBlack" />
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/font_size_18" />
 
     </androidx.appcompat.widget.Toolbar>
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvGitHubRepo"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolBar" />
+        android:layout_below="@+id/toolBar">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvGitHubRepo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -42,5 +47,15 @@
             android:indeterminateTint="@color/colorWhite"
             android:visibility="gone" />
     </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/noInternetLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <include layout="@layout/view_retry" />
+    </RelativeLayout>
 
 </RelativeLayout>

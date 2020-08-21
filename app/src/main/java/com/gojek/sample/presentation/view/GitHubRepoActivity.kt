@@ -21,6 +21,7 @@ import com.gojek.sample.presentation.utils.ViewModelFactory
 import com.gojek.sample.presentation.viewmodel.GitHubViewModel
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_github_repo.*
+import kotlinx.android.synthetic.main.view_retry.*
 import javax.inject.Inject
 
 
@@ -35,13 +36,13 @@ class GitHubRepoActivity : AppCompatActivity() {
         AndroidInjection.inject(this)
         setContentView(R.layout.activity_github_repo)
         val toolbar = findViewById<View>(R.id.toolBar) as Toolbar
-        toolbar.title=""
+        toolbar.title = ""
         setSupportActionBar(toolbar)
         initView()
         gitHubViewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(GitHubViewModel::class.java)
         gitHubViewModel.githubRepoLiveData.observe(this, Observer { handleResponse(it) })
-//        gitHubViewModel.errorMsgLiveData.observe(this, Observer { showNoNetworkError(it) })
+        requestForGitHubApi()
 
     }
 
@@ -61,11 +62,23 @@ class GitHubRepoActivity : AppCompatActivity() {
             }
         })
 
-    }
+        swipeContainer.setOnRefreshListener {
+            requestForGitHubApi()
+        }
 
-    override fun onResume() {
-        super.onResume()
-        gitHubViewModel.getGitHubRepo(GitHubRepoReq("javascript","daily"))
+        // Configure the refreshing colors
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(
+            android.R.color.holo_blue_bright,
+            android.R.color.holo_green_light,
+            android.R.color.holo_orange_light,
+            android.R.color.holo_red_light
+        )
+
+        retryButton.setOnClickListener{
+            requestForGitHubApi()
+
+        }
     }
 
     /**
@@ -73,6 +86,7 @@ class GitHubRepoActivity : AppCompatActivity() {
      */
     private fun handleResponse(resource: Resource<List<UIGitHubRepoData>>) {
         hideProgress()
+        hideNetworkError()
         resource.let { resourceList ->
             when (resourceList.state) {
                 ResourceState.LOADING -> {
@@ -80,15 +94,12 @@ class GitHubRepoActivity : AppCompatActivity() {
                 }
                 ResourceState.SUCCESS -> {
                     resourceList.data?.let { itemList ->
+                        swipeContainer.isRefreshing = false
                         gitHubItemAdapter.setItems(itemList)
                     }
                 }
                 ResourceState.ERROR -> {
-                    Toast.makeText(
-                        this@GitHubRepoActivity,
-                        resourceList.message,
-                        Toast.LENGTH_LONG
-                    ).show()
+                    showNetworkError()
                 }
             }
         }
@@ -114,5 +125,18 @@ class GitHubRepoActivity : AppCompatActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun showNetworkError() {
+        noInternetLayout.visibility = View.VISIBLE
+    }
+
+    private fun hideNetworkError() {
+        noInternetLayout.visibility = View.GONE
+    }
+
+    private fun requestForGitHubApi(){
+        gitHubViewModel.getGitHubRepo(GitHubRepoReq("java", "daily"))
+
     }
 }

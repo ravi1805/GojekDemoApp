@@ -3,6 +3,7 @@ package com.gojek.sample.service
 
 import com.gojek.sample.BuildConfig
 import io.reactivex.schedulers.Schedulers
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -47,13 +48,19 @@ class RetrofitClient : NetworkClient() {
      * @param webUrl : Target Url to which connect for api service call
      */
 
-    override fun setupNetworkClient(httpUrlString: String) {
+    override fun setupNetworkClient(httpUrlString: String, cache: Cache) {
         val logging = HttpLoggingInterceptor()
 
         logging.level =
             if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
 
-           val okHttpClient = OkHttpClient.Builder()
+        val okHttpClient = OkHttpClient.Builder()
+            .cache(cache)
+            .addInterceptor { chain ->
+               var request = chain.request()
+                request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 2).build()
+                chain.proceed(request)
+            }
             .addInterceptor(logging)
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)

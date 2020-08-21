@@ -11,22 +11,15 @@ import com.gojek.sample.service.INetworkClientService
 import javax.inject.Inject
 
 class GitHubViewModel @Inject constructor(
-    private val gitHubRepoUseCase: GetGitHubRepoUseCase,
-    private val iNetworkClientService: INetworkClientService
+    private val gitHubRepoUseCase: GetGitHubRepoUseCase
 ) : ViewModel() {
 
-    val TAG = "GitHubViewModel"
-
     val githubRepoLiveData = MutableLiveData<Resource<List<UIGitHubRepoData>>>()
-    val errorMsgLiveData = MutableLiveData<String>()
 
     fun getGitHubRepo(request: GitHubRepoReq) {
         githubRepoLiveData.setLoading()
-        if(iNetworkClientService.isMobileNetworkConnected()) {
-            gitHubRepoUseCase.execute(GitHubRepoObserver(), request)
-        }else{
-            errorMsgLiveData.postValue(AppUtils.noNetworkMsg)
-        }
+        gitHubRepoUseCase.execute(GitHubRepoObserver(), request)
+
     }
 
     private inner class GitHubRepoObserver : DefaultObserver<List<UIGitHubRepoData>>() {

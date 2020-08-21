@@ -42,4 +42,7 @@ ext {
 
     //Glide
     glideVersion = "4.11.0"
+
+    //swipe refresh
+    swipeVersion="1.0.0"
 }

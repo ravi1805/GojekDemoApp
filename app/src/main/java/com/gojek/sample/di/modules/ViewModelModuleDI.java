@@ -40,8 +40,8 @@ public class ViewModelModuleDI {
     @Provides
     @IntoMap
     @ViewModelKey(GitHubViewModel.class)
-    ViewModel gitHubViewModel(@NonNull GetGitHubRepoUseCase searchItemUseCase, INetworkClientService iNetworkClientService) {
-        return new GitHubViewModel(searchItemUseCase, iNetworkClientService);
+    ViewModel gitHubViewModel(@NonNull GetGitHubRepoUseCase gitHubRepoUseCase) {
+        return new GitHubViewModel(gitHubRepoUseCase);
     }
 
 }
