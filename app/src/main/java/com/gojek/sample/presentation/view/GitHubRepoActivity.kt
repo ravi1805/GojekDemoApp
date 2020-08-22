@@ -42,7 +42,7 @@ class GitHubRepoActivity : AppCompatActivity() {
         gitHubViewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(GitHubViewModel::class.java)
         gitHubViewModel.githubRepoLiveData.observe(this, Observer { handleResponse(it) })
-        requestForGitHubApi()
+        requestForGitHubApi(false)
 
     }
 
@@ -63,7 +63,7 @@ class GitHubRepoActivity : AppCompatActivity() {
         })
 
         swipeContainer.setOnRefreshListener {
-            requestForGitHubApi()
+            requestForGitHubApi(true)
         }
 
         // Configure the refreshing colors
@@ -75,8 +75,8 @@ class GitHubRepoActivity : AppCompatActivity() {
             android.R.color.holo_red_light
         )
 
-        retryButton.setOnClickListener{
-            requestForGitHubApi()
+        retryButton.setOnClickListener {
+            requestForGitHubApi(true)
 
         }
     }
@@ -99,6 +99,8 @@ class GitHubRepoActivity : AppCompatActivity() {
                     }
                 }
                 ResourceState.ERROR -> {
+                    gitHubItemAdapter.setItems(emptyList())
+                    swipeContainer.isRefreshing = false
                     showNetworkError()
                 }
             }
@@ -135,8 +137,8 @@ class GitHubRepoActivity : AppCompatActivity() {
         noInternetLayout.visibility = View.GONE
     }
 
-    private fun requestForGitHubApi(){
-        gitHubViewModel.getGitHubRepo(GitHubRepoReq("java", "daily"))
+    private fun requestForGitHubApi(ignoreCache: Boolean) {
+        gitHubViewModel.getGitHubRepo(GitHubRepoReq("java", "daily", ignoreCache))
 
     }
 }

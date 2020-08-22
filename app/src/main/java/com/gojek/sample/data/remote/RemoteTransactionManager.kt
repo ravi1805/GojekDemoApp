@@ -1,5 +1,6 @@
 package com.gojek.sample.data.remote
 
+import com.gojek.sample.BuildConfig
 import com.gojek.sample.data.remote.api.IRemoteServiceApi
 import com.gojek.sample.data.datasource.IRemoteDataTransaction
 import com.gojek.sample.data.remote.response.GitHubApiResponse
@@ -17,10 +18,13 @@ class RemoteTransactionManager @Inject constructor(
     IRemoteDataTransaction {
 
     override fun getGitHubRepository(request: GitHubRepoReq): Observable<List<UIGitHubRepoData>> {
+        networkService.setupNetworkClient(BuildConfig.URL, request.ignoreCache)
         return Observable.create<List<GitHubApiResponse>> { emitter ->
             val call = getApiService().getGitHubRepo(request.language, request.sinceTime)
             val callback =
-                networkService.getJsonCallback(emitter, object : TypeToken<List<GitHubApiResponse>>(){})
+                networkService.getJsonCallback(
+                    emitter,
+                    object : TypeToken<List<GitHubApiResponse>>() {})
             call.enqueue(callback)
         }.flatMap { result ->
             Observable.just(result.mapToDomain())

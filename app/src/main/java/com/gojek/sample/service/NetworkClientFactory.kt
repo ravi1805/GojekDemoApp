@@ -9,7 +9,6 @@ import okhttp3.Cache
 import okhttp3.ResponseBody
 import retrofit2.Callback
 import java.io.File
-import java.util.*
 import javax.inject.Inject
 
 /**
@@ -32,9 +31,9 @@ class NetworkClientFactory @Inject constructor(private val context: Context) :
      * @param pref: user preference
      *
      */
-    override fun setupNetworkClient(urlString: String) {
+    override fun setupNetworkClient(urlString: String, ignoreCache: Boolean) {
         networkClient = RetrofitClient()
-        networkClient.setupNetworkClient(urlString, getCache())
+        networkClient.setupNetworkClient(urlString, getCache(), ignoreCache)
 
     }
 

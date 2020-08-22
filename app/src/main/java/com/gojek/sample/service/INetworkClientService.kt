@@ -9,7 +9,7 @@ interface INetworkClientService {
     /**
      * Setup network client for application
      */
-    fun setupNetworkClient(urlString: String)
+    fun setupNetworkClient(urlString: String, ignoreCache: Boolean = true)
 
     /**
      * Get network client
@@ -28,7 +28,10 @@ interface INetworkClientService {
      * @param emitter
      * @param listOfTypeToken response class
      */
-    fun <R> getJsonCallback(emitter: ObservableEmitter<List<R>>, listOfTypeToken:TypeToken<out List<R>> ): Callback<ResponseBody>
+    fun <R> getJsonCallback(
+        emitter: ObservableEmitter<List<R>>,
+        listOfTypeToken: TypeToken<out List<R>>
+    ): Callback<ResponseBody>
 
     /**
      * Check whether internet is available or not

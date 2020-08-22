@@ -48,7 +48,7 @@ class RetrofitClient : NetworkClient() {
      * @param webUrl : Target Url to which connect for api service call
      */
 
-    override fun setupNetworkClient(httpUrlString: String, cache: Cache) {
+    override fun setupNetworkClient(httpUrlString: String, cache: Cache, ignoreCache: Boolean) {
         val logging = HttpLoggingInterceptor()
 
         logging.level =
@@ -57,7 +57,8 @@ class RetrofitClient : NetworkClient() {
         val okHttpClient = OkHttpClient.Builder()
             .cache(cache)
             .addInterceptor(logging)
-            .addInterceptor(provideOfflineCacheInterceptor())
+            .addNetworkInterceptor(provideRemoteInterceptor())
+            .addInterceptor(provideOfflineCacheInterceptor(ignoreCache))
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .writeTimeout(90, TimeUnit.SECONDS)
@@ -77,21 +78,64 @@ class RetrofitClient : NetworkClient() {
         }
     }
 
-    private fun provideOfflineCacheInterceptor(): Interceptor {
+    private fun provideRemoteInterceptor(): Interceptor {
         return object : Interceptor {
             @Throws(IOException::class)
             override fun intercept(chain: Interceptor.Chain): Response {
-                return try {
-                    chain.proceed(chain.request())
-                } catch (e: Exception) {
-                    val cacheControl = CacheControl.Builder()
-                        .onlyIfCached()
-                        .maxStale(2, TimeUnit.HOURS)
+                var request = chain.request()
+                val originalResponse = chain.proceed(request)
+                val cacheControl = originalResponse.header("Cache-Control")
+                return if (cacheControl == null || cacheControl.contains("no-store") || cacheControl.contains(
+                        "no-cache"
+                    ) ||
+                    cacheControl.contains("must-revalidate") || cacheControl.contains("max-stale=0")
+                ) {
+                    val cc = CacheControl.Builder()
+                        .maxStale(2, TimeUnit.DAYS)
                         .build()
-                    val offlineRequest = chain.request().newBuilder()
-                        .cacheControl(cacheControl)
+                    request = request.newBuilder()
+                        .cacheControl(cc)
                         .build()
-                    chain.proceed(offlineRequest)
+                    chain.proceed(request)
+                } else {
+                    originalResponse
+                }
+            }
+        }
+    }
+
+    private fun provideOfflineCacheInterceptor(ignoreCache: Boolean): Interceptor {
+        if (ignoreCache) {
+            return object : Interceptor {
+                @Throws(IOException::class)
+                override fun intercept(chain: Interceptor.Chain): Response {
+                    return try {
+                        val remoteRequest = chain.request().newBuilder()
+                            .cacheControl(CacheControl.FORCE_NETWORK)
+                            .addHeader("Cache-Control", "no-cache")
+                            .build()
+                        chain.proceed(remoteRequest)
+                    } catch (e: Exception) {
+                        chain.proceed(chain.request())
+                    }
+                }
+            }
+        } else {
+            return object : Interceptor {
+                @Throws(IOException::class)
+                override fun intercept(chain: Interceptor.Chain): Response {
+                    return try {
+                        chain.proceed(chain.request())
+                    } catch (e: Exception) {
+                        val cacheControl = CacheControl.Builder()
+                            .onlyIfCached()
+                            .maxStale(2, TimeUnit.HOURS)
+                            .build()
+                        val offlineRequest = chain.request().newBuilder()
+                            .cacheControl(cacheControl)
+                            .build()
+                        chain.proceed(offlineRequest)
+                    }
                 }
             }
         }

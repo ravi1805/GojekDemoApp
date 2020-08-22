@@ -15,9 +15,6 @@ class MainApplication : MultiDexApplication(), HasAndroidInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
 
-    @Inject
-    lateinit var networkService: INetworkClientService
-
     override fun androidInjector(): AndroidInjector<Any> {
         return dispatchingAndroidInjector
     }
@@ -25,7 +22,6 @@ class MainApplication : MultiDexApplication(), HasAndroidInjector {
     override fun onCreate() {
         super.onCreate()
         initDagger()
-        initNetworkClient()
     }
 
     private fun initDagger() {
@@ -33,9 +29,5 @@ class MainApplication : MultiDexApplication(), HasAndroidInjector {
             .application(this)
             .build()
             .inject(this)
-    }
-
-    private fun initNetworkClient() {
-        networkService.setupNetworkClient(BuildConfig.URL)
     }
 }
