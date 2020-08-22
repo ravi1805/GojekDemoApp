@@ -39,8 +39,8 @@ class NetworkClientFactory @Inject constructor(private val context: Context) :
     }
 
     private fun getCache(): Cache {
-        val cacheSize = (5 * 1024 * 1024).toLong()
-        val cacheDir = File(System.getProperty("java.io.tmpdir"), UUID.randomUUID().toString())
+        val cacheSize = (10 * 1024 * 1024).toLong()
+        val cacheDir = File(System.getProperty("java.io.tmpdir"), "offlineCache")
         return Cache(cacheDir, cacheSize)
 
     }

@@ -3,12 +3,12 @@ package com.gojek.sample.service
 
 import com.gojek.sample.BuildConfig
 import io.reactivex.schedulers.Schedulers
-import okhttp3.Cache
-import okhttp3.OkHttpClient
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 
@@ -56,12 +56,8 @@ class RetrofitClient : NetworkClient() {
 
         val okHttpClient = OkHttpClient.Builder()
             .cache(cache)
-            .addInterceptor { chain ->
-               var request = chain.request()
-                request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 2).build()
-                chain.proceed(request)
-            }
             .addInterceptor(logging)
+            .addInterceptor(provideOfflineCacheInterceptor())
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .writeTimeout(90, TimeUnit.SECONDS)
@@ -81,5 +77,24 @@ class RetrofitClient : NetworkClient() {
         }
     }
 
+    private fun provideOfflineCacheInterceptor(): Interceptor {
+        return object : Interceptor {
+            @Throws(IOException::class)
+            override fun intercept(chain: Interceptor.Chain): Response {
+                return try {
+                    chain.proceed(chain.request())
+                } catch (e: Exception) {
+                    val cacheControl = CacheControl.Builder()
+                        .onlyIfCached()
+                        .maxStale(2, TimeUnit.HOURS)
+                        .build()
+                    val offlineRequest = chain.request().newBuilder()
+                        .cacheControl(cacheControl)
+                        .build()
+                    chain.proceed(offlineRequest)
+                }
+            }
+        }
+    }
 
 }
