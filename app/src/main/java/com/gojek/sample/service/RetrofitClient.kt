@@ -116,7 +116,11 @@ class RetrofitClient : NetworkClient() {
                             .build()
                         chain.proceed(remoteRequest)
                     } catch (e: Exception) {
-                        chain.proceed(chain.request())
+                        val remoteRequest = chain.request().newBuilder()
+                            .cacheControl(CacheControl.FORCE_NETWORK)
+                            .addHeader("Cache-Control", "no-cache")
+                            .build()
+                        chain.proceed(remoteRequest)
                     }
                 }
             }
