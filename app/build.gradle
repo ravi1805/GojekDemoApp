@@ -61,13 +61,17 @@ dependencies {
     implementation "com.google.android.material:material:$materialDesignVersion"
 
 
-
     testImplementation "junit:junit:$junitVer"
     androidTestImplementation "androidx.test.ext:junit:$androidJunitrVer"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
-    implementation "androidx.test.espresso:espresso-idling-resource:$espressoCoreVersion"
     androidTestImplementation "androidx.test:rules:$testRule"
-
+    testImplementation "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}"
+    testImplementation "androidx.test:core:$testCore"
+    implementation "android.arch.core:core-testing:$arch_core_test_v"
+    androidTestImplementation "androidx.test.uiautomator:uiautomator:$uiautomator"
+    androidTestImplementation "com.android.support.test.espresso.idling:idling-concurrent:$espressoCoreVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoCoreVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoCoreVersion"
 
 
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"

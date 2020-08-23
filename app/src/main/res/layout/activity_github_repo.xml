@@ -12,6 +12,7 @@
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
         <TextView
+            android:id="@+id/toolBarTitleText"
             style="@style/TextBodyStyleBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

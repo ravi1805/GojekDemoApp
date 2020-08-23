@@ -7,7 +7,7 @@ import com.gojek.sample.R
 import com.gojek.sample.navigation.ClassNavigation
 import com.gojek.sample.presentation.view.GitHubRepoActivity
 
-private const val SPLASH_SCREEN_TIMEOUT = 3000L
+private const val SPLASH_SCREEN_TIMEOUT = 1000L
 
 class SplashActivity : BaseActivity() {
 
